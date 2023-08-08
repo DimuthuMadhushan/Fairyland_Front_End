@@ -1,0 +1,18 @@
+.n-wrapper{
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+}
+.n-list{
+    flex: 10;
+}
+.n-list>ul{
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin-right: 4rem;
+}
+.n-list>ul>li:hover{
+    cursor: pointer;
+    color: var(--orange);
+}

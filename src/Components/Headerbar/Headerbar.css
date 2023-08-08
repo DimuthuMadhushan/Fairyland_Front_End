@@ -1,0 +1,45 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    height: 20vh;
+}
+.n-left{
+    flex: 1;
+    display: flex;
+    gap: 2rem;
+}
+.n-left>img{
+    transform: scale(0.7);
+}
+.n-right{
+    display: flex;
+    align-items: center;
+    flex:1;
+    justify-content: flex-end;
+    font-weight: 400;
+
+}
+
+.list>ul{
+    width: 100%;
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin-right: 4rem;
+    align-items: center;
+    transform: scale(0.8);
+
+
+}
+.list>ul>li{
+    flex:3;
+}
+.cart-image{
+    transform: scale(0.9);
+}
+.cartw{
+    color: var(--black);
+}
+.cart-image:hover{
+    transform: scale(1);
+}
