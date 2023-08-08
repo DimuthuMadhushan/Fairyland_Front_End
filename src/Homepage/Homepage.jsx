@@ -7,7 +7,7 @@ import MyNav from '../Components/MyNav/MyNav'
 function Homepage() {
   return (
     <div>
-   
+      <div className='headerbar'><Headerbar/></div>
       <div className='mynav'><MyNav/></div>
       
     </div>

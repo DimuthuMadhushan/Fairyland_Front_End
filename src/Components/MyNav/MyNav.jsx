@@ -6,17 +6,26 @@ import Dropper from '../Dropper/Dropper'
 function MyNav() {
   return (
         <div className="n-wrapper">
-           <div className="n-list">
+           <div className='category'>
+            <ul>
+                <li>
+                    <button className='button n-button'>Men</button>
+                </li>
+                <li>
+                    <button className='button n-button'>Women</button>                
+                </li>
+                <li>
+                    <button className='button n-button'>Kids</button>
+                </li>
+            </ul>
+           </div>
+           <div className='homenav'>
                 <ul>
-                    <li>        
-                        <Dropper/>
-                    </li>
-                                            <li>Men</li>
-                    <li>Women</li>
-                    <li>Kids</li>
-                    <li></li>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
                 </ul>
-             </div>  
+           </div>
         </div>
     )
 }

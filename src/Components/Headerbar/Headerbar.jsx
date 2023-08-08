@@ -14,8 +14,8 @@ function Headerbar({name}) {
         <div className='n-right'>
           <div className='list'>
           <ul>
-            <li>Dimuthu</li>
             <li><Dropper/></li>
+            <li>Dimuthu</li>
             <li>
               <a href="https://react-bootstrap.netlify.app/docs/getting-started/introduction">
                   <img className='cart-image' src={CartImage} alt="" />

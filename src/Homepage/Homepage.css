@@ -1,0 +1,10 @@
+.headerbar{
+    width: 100%;
+    box-shadow: var(--boxShadow);
+
+}
+.mynav{
+    width: 100%;
+    position: relative;
+    top:-3rem;    
+}

@@ -6,7 +6,20 @@
   --boxShadow:0px 19px 60px rgb(0 0 0 /8%);
 }
 .App{
-  padding: 0.5rem 3.5rem;
+
   overflow: hidden;
+  color: var(--black);
+}
+.button{
+  border: 3px solid var(--lightGreen);
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  padding: 0.3rem;
+  background: var(--lightGreen)
+}
+.button:hover{
+  cursor: pointer;
+  background: white;
   color: var(--black);
 }
