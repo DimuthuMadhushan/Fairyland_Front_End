@@ -1,7 +1,6 @@
 import React from 'react'
 import './MyNav.css'
-import Dropdown from 'react-bootstrap/Dropdown'
-import Dropper from '../Dropper/Dropper'
+
 
 function MyNav() {
   return (
@@ -9,21 +8,27 @@ function MyNav() {
            <div className='category'>
             <ul>
                 <li>
-                    <button className='button n-button'>Men</button>
+                    <button className='button n-button'>Men's Clothing</button>
                 </li>
                 <li>
-                    <button className='button n-button'>Women</button>                
+                    <button className='button n-button'>Women's Clothing</button>                
                 </li>
                 <li>
-                    <button className='button n-button'>Kids</button>
+                    <button className='button n-button'>Kids' Clothing</button>
                 </li>
             </ul>
            </div>
            <div className='homenav'>
                 <ul>
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="">About Us</a>
+                    </li>
+                    <li>
+                        <a href="">Contact Us</a>
+                    </li>
                 </ul>
            </div>
         </div>

@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     height: 20vh;
+    background-color: white;
 }
 .n-left{
     flex: 1;
@@ -36,10 +37,17 @@
 }
 .cart-image{
     transform: scale(0.9);
+    text-decoration: none;
+    border: none;
 }
 .cartw{
     color: var(--black);
+    text-decoration: none;
+    border: none;
 }
 .cart-image:hover{
     transform: scale(1);
+}
+.list>ul>li>a{
+    text-decoration: none;
 }

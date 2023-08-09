@@ -23,3 +23,31 @@
   background: white;
   color: var(--black);
 }
+.headerbar{
+  width: 100%;
+  box-shadow: var(--boxShadow);
+  position: fixed;
+  top: 0;
+  z-index: 1;
+
+}
+.mynav{
+  width: 100%;
+  position: fixed;
+  top:5rem;  
+  z-index: 1;  
+}
+.itemdetail{
+  position: absolute;
+  top: 3rem;
+}
+.but{
+  background-color: var(--lightGreen) !important;
+  border: 3px solid var(--lightGreen) !important;
+  margin-left: 1rem !important;
+  font-size: 0.8rem !important;
+}
+.but:hover{
+  background-color: white !important;
+  color: var(--black) !important;
+}
