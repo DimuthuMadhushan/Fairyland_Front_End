@@ -45,7 +45,7 @@
   background-color: var(--lightGreen) !important;
   border: 3px solid var(--lightGreen) !important;
   margin-left: 1rem !important;
-  font-size: 0.8rem !important;
+  font-size: 1rem !important;
 }
 .but:hover{
   background-color: white !important;
@@ -65,4 +65,9 @@
 .cart{
   position: relative;
   top: 4rem;
+}
+.login{
+  position: relative;
+  top: 5rem;
+  transform: scale(1);
 }

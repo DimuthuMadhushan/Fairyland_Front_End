@@ -4,6 +4,7 @@ import Logo from '../images/fairylandlogo.png'
 import Dropper from '../Dropper/Dropper'
 import CartImage from '../images/cart.png'
 import Cart from '../Cart/Cart'
+import { Button } from 'react-bootstrap'
 
 function Headerbar({ name }) {
   let i = 0;
@@ -15,7 +16,9 @@ function Headerbar({ name }) {
       <div className='n-right'>
         <div className='list'>
           <ul>
-            <li><Dropper /></li>
+            <li>
+              <a href='/login'><Button className='but'>Login/Register</Button></a>
+            </li>
             <li>Dimuthu</li>
             <li>
               
