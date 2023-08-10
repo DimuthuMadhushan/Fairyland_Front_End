@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import './Homepage.css'
-import Headerbar from '../Components/Headerbar/Headerbar'
-import MyNav from '../Components/MyNav/MyNav'
 import GroupImage from '../Components/images/groupimg.png'
 import Products from '../Components/Products/Products'
-import Footer from '../Components/Footer/Footer'
 
 
 
 function Homepage() {
-  const [items,setItems]=useState([])
-  useEffect(()=>{
-    const fecthItems = async () =>{
-      const response=await fetch('https://fakestoreapi.com/products')
-      const data=await response.json()
+  const [items, setItems] = useState([])
+  useEffect(() => {
+    const fecthItems = async () => {
+      const response = await fetch('https://fakestoreapi.com/products')
+      const data = await response.json()
       console.log(data)
       setItems(data)
     }
     fecthItems()
-  },[])
+  }, [])
   return (
     <div>
       <div className='boximg'>
@@ -39,23 +36,20 @@ function Homepage() {
             </div>
           </div>
         </section>
-      </div>  
-      <div>
-      <div className='newarrival'>
-        <div className='innerardiv'>New Arrivals</div>
       </div>
+      <div>
+        <div className='newarrival'>
+          <div className='innerardiv'>New Arrivals</div>
+        </div>
         {
-          items.length>0?
-          <Products products={items}/>
-          :
-          <span>Loading</span>
+          items.length > 0 ?
+            <Products products={items} />
+            :
+            <span>Loading</span>
         }
       </div>
-      <div className='footer'>
-      <Footer/>
-      </div>
     </div>
-    )
+  )
 }
 
 export default Homepage

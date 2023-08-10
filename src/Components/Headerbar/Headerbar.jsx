@@ -3,32 +3,37 @@ import './Headerbar.css'
 import Logo from '../images/fairylandlogo.png'
 import Dropper from '../Dropper/Dropper'
 import CartImage from '../images/cart.png'
+import Cart from '../Cart/Cart'
 
-function Headerbar({name}) {
-  let i=0;
+function Headerbar({ name }) {
+  let i = 0;
   return (
     <div className='header'>
-        <div className='n-left'>
-             <img src={Logo} alt="" />   
-        </div>
-        <div className='n-right'>
-          <div className='list'>
+      <div className='n-left'>
+        <img src={Logo} alt="" />
+      </div>
+      <div className='n-right'>
+        <div className='list'>
           <ul>
-            <li><Dropper/></li>
+            <li><Dropper /></li>
             <li>Dimuthu</li>
             <li>
-              <a href="https://react-bootstrap.netlify.app/docs/getting-started/introduction">
-                  <img className='cart-image' src={CartImage} alt="" />
-                  <span className='cartw'>{i} Item(s)</span>
-                  
+              
+              <a
+                href='/cart'
+              >
+            
+                <img className='cart-image' src={CartImage} alt="" />
+                <span className='cartw'>{i} Item(s)</span>
+
               </a>
             </li>
           </ul>
-          </div>
-          
         </div>
+
+      </div>
     </div>
-    
+
   )
 }
 

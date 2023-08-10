@@ -38,7 +38,7 @@
   z-index: 1;  
 }
 .itemdetail{
-  position: absolute;
+  position: relative;
   top: 3rem;
 }
 .but{
@@ -50,4 +50,19 @@
 .but:hover{
   background-color: white !important;
   color: var(--black) !important;
+}
+.about{
+  position: relative;
+  top: 3rem;
+}
+.footer{
+  position: relative;
+  bottom: 0;
+}.contactus{
+  position: relative;
+  top: 3rem;
+}
+.cart{
+  position: relative;
+  top: 4rem;
 }

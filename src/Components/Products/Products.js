@@ -15,7 +15,7 @@ function Products({ products = [] }) {
                                 return (
                                     <Link to={`/product/${id}`} style={{
                                         textDecoration: 'none'
-                                       }} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer">
+                                    }} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer">
                                         <a className="block relative h-48 rounded overflow-hidden">
                                             <img alt={title} className="object-contain object-center w-full h-full block" src={image} />
                                         </a>
