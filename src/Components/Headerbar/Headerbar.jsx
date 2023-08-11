@@ -17,7 +17,10 @@ function Headerbar({ name }) {
         <div className='list'>
           <ul>
             <li>
-              <a href='/login'><Button className='but'>Login/Register</Button></a>
+              <a href='registraion'><Button className='but'>Register</Button></a>
+            </li>
+            <li>
+              <a href='/login'><Button className='but'>Login</Button></a>
             </li>
             <li>Dimuthu</li>
             <li>

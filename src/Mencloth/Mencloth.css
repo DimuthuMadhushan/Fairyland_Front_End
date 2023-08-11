@@ -1,0 +1,13 @@
+.mensw{
+    z-index: -1;
+}
+.menlist{
+    margin-top: 2rem;
+}
+.minnerdiv{
+    border: 3px solid var(--lightGreen);
+    font-size: 2rem;
+    width: 30%;
+    margin-left: 35%;
+    border-radius: 10px;
+}

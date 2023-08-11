@@ -8,20 +8,21 @@ function MyNav() {
             <div className='category'>
                 <ul>
                     <li>
-                        <button className='button n-button'>Men's Clothing</button>
+                        <a href='/men'><button className='button n-button'>Men's Clothing</button></a>
                     </li>
                     <li>
-                        <button className='button n-button'>Women's Clothing</button>
+                        <a href='/women'><button className='button n-button'>Women's Clothing</button></a>
+                        
                     </li>
                     <li>
-                        <button className='button n-button'>Kids' Clothing</button>
+                    <a href='/Kids'><button className='button n-button'>Kids' Clothing</button></a>
                     </li>
                 </ul>
             </div>
             <div className='homenav'>
                 <ul>
                     <li>
-                        <a href="/">Home</a>
+                        <a href="/home">Home</a>
                     </li>
                     <li>
                         <a href="/about">About Us</a>

@@ -1,9 +1,7 @@
 import React from 'react'
 import './Products.css'
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Placeholder from 'react-bootstrap/Placeholder';
+
 
 function Products({ products = [] }) {
     return (
@@ -16,12 +14,10 @@ function Products({ products = [] }) {
                                 console.log(product, 'product')
                                 const { id, title, price, description, category, image } = product;
                                 return (
-                                    <Link to={`/product/${id}`} style={{
-                                        textDecoration: 'none'
-                                    }} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer">
-                                        <a className="block relative h-48 rounded overflow-hidden">
+                                    <Link to={`/product/${id}`} style={{textDecoration: 'none'}} className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-sm cursor-pointer">
+                                        <div className="block relative h-48 rounded overflow-hidden">
                                             <img alt={title} className="object-contain object-center w-full h-full block" src={image} />
-                                        </a>
+                                        </div>
                                         <div className="mt-4">
                                             <h3 className="hover:underline text-gray-500 text-xs tracking-widest title-font mb-1 uppercase">{category}</h3>
                                             <h2 className="text-gray-900 title-font text-lg font-medium">{title}</h2>

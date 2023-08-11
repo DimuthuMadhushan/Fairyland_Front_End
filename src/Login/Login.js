@@ -31,7 +31,7 @@ function App() {
 
         <div className='d-flex flex-row mt-2'>
           <MDBIcon fas icon="cubes fa-3x me-3" style={{ color: '#ff6219' }}/>
-          <img src={Logo}/>
+          <img src={Logo} alt='logo'/>
         </div>
 
         <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Sign into your account</h5>
@@ -41,7 +41,7 @@ function App() {
 
         <MDBBtn className="mb-4 px-5 but" color='dark' size='lg'>Login</MDBBtn>
         <a className="small  forgot" href="#!">Forgot password?</a>
-        <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Don't have an account? <a href="#!" style={{fontSize:'1.5rem'}}>Register here</a></p>
+        <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Don't have an account? <a href='/registraion' style={{fontSize:'1.5rem'}}>Register here</a></p>
 
         <div className='d-flex flex-row justify-content-start'>
           <a href="#!" className="small text-muted me-1">Terms of use.</a>

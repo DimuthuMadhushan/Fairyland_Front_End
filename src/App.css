@@ -71,3 +71,29 @@
   top: 5rem;
   transform: scale(1);
 }
+.registration{
+  position: relative;
+  top: 1rem;
+  transform: scale(0.8);
+}
+.men{
+  position: relative;
+  top: 8rem;
+  z-index: 0;
+  margin-top: 3rem;
+  
+}
+.women{
+  position: relative;
+  top: 8rem;
+  z-index: 0;
+  margin-top: 3rem;
+  
+}
+.kids{
+  position: relative;
+  top: 8rem;
+  z-index: 0;
+  margin-top: 3rem;
+  
+}
