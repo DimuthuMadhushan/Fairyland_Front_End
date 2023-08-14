@@ -1,14 +1,20 @@
-import React from 'react'
+
 import './Headerbar.css'
 import Logo from '../images/fairylandlogo.png'
-import Dropper from '../Dropper/Dropper'
 import CartImage from '../images/cart.png'
-import Cart from '../Cart/Cart'
 import { Button } from 'react-bootstrap'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
-function Headerbar({ name }) {
-  let i = 0;
+function Headerbar() {
+  const navigate=useNavigate();
+  const logout=async()=>{
+      Cookies.remove('jwt');
+      Cookies.remove('user');
+      navigate('/')
+  }
   return (
+    
     <div className='header'>
       <div className='n-left'>
         <img src={Logo} alt="" />
@@ -22,7 +28,10 @@ function Headerbar({ name }) {
             <li>
               <a href='/login'><Button className='but'>Login</Button></a>
             </li>
-            <li>Dimuthu</li>
+            <li>
+              <a ><Button onClick={()=>logout()} className='but'>Logut</Button></a>
+            </li>
+            <li className='usertxt'>{Cookies.get('user')}</li>
             <li>
               
               <a
@@ -30,7 +39,7 @@ function Headerbar({ name }) {
               >
             
                 <img className='cart-image' src={CartImage} alt="" />
-                <span className='cartw'>{i} Item(s)</span>
+                <span className='cartw'>{Cookies.get('numofitems')} Item(s)</span>
 
               </a>
             </li>

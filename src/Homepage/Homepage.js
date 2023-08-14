@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './Homepage.css'
 import GroupImage from '../Components/images/groupimg.png'
 import Products from '../Components/Products/Products'
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Placeholder from 'react-bootstrap/Placeholder';
 

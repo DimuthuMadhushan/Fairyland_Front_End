@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css'
 import Logo from '../Components/images/fairylandlogo.png'
 import {
@@ -13,8 +13,39 @@ import {
   MDBInput
 }
 from 'mdb-react-ui-kit';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+  
+function Login() {
+  const[username,setUserName]=useState('');
+  const[password,setPassword]=useState('');
 
-function App() {
+  const navigate=useNavigate();
+
+  const handleLogin=async()=>{
+    try{
+ const response=await fetch('http://localhost:8080/authenticate', {
+  method: 'POST',
+  body: JSON.stringify({
+    username:username,
+    password:password
+  }),
+  headers: {
+    'Content-type': 'application/json',
+  },
+  
+})
+const data=await response.json();
+Cookies.set('jwt',data.jwt,{expires:1})
+console.log(Cookies.get('name')+'  Dimuthu')
+Cookies.set('user' ,username,{expires:1})
+navigate('/');
+    }catch(error){
+      alert("Invalid username or passworD");
+      setUserName('');
+      setPassword('');
+    }
+ }
   return (
     <div className='log'>
         <MDBContainer className="my-5">
@@ -36,10 +67,10 @@ function App() {
 
         <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Sign into your account</h5>
 
-          <MDBInput wrapperClass='mb-4' label='Username' id='formControlLg' type='email' size="lg"/>
-          <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
+          <MDBInput value={username} onChange={(e)=>{setUserName(e.target.value)}} wrapperClass='mb-4' label='Username' id='formControlLg' type='email' size="lg"/>
+          <MDBInput value={password} onChange={(e)=>{setPassword(e.target.value)}} wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
 
-        <MDBBtn className="mb-4 px-5 but" color='dark' size='lg'>Login</MDBBtn>
+        <MDBBtn  className="mb-4 px-5 but" color='dark' size='lg' onClick={()=>handleLogin()}>Login</MDBBtn>
         <a className="small  forgot" href="#!">Forgot password?</a>
         <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Don't have an account? <a href='/registraion' style={{fontSize:'1.5rem'}}>Register here</a></p>
 
@@ -60,4 +91,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;

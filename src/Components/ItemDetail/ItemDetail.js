@@ -1,10 +1,11 @@
-import { Input } from '@mui/material';
+import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap';
-import { Link, NavLink, Navigate, useParams } from 'react-router-dom'
-import Footer from '../Footer/Footer';
+import { Link, useParams } from 'react-router-dom'
+
 
 function ItemDetail() {
+  Cookies.set('items',0,{expires:1})
   const { id } = useParams();
   const [item, setItem] = useState([])
   useEffect(() => {
@@ -26,6 +27,7 @@ function ItemDetail() {
           return{
             ...product,
             quantity: product.quantity+1
+            
           }
         }
         return product
@@ -34,7 +36,8 @@ function ItemDetail() {
     }else{
       localStorage.setItem('cart',JSON.stringify([...cart,{...item,quantity: 1}]))
     }
-    
+      Cookies.remove('items');
+      Cookies.set('items',cart.length,{expires:1})
       alert("Aded succesfuly")
     
   }
@@ -83,7 +86,9 @@ function ItemDetail() {
                 <Link to={'/cart'}>
                 <Button className='but checkout' onClick={()=>handleCart(item,true)}>Ceck out</Button>
                 </Link>
+                <Link to={'/itemdetail'}>
                 <Button className='but addtocart' onClick={()=>handleCart(item,true)}>Add to cart</Button>
+                </Link>
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                   <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
