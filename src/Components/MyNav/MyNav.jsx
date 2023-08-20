@@ -1,8 +1,9 @@
-import React from 'react'
 import './MyNav.css'
+import Cookies from 'js-cookie'
 
 
 function MyNav() {
+
     return (
         <div className="n-wrapper">
             <div className='category'>
@@ -29,6 +30,12 @@ function MyNav() {
                     </li>
                     <li>
                         <a href="/contact">Contact Us</a>
+                    </li>
+                    <li>
+                        <a href="/setting">{Cookies.get('seti')}</a>
+                    </li>
+                    <li>
+                        <a href="/dashboard">{Cookies.get('dash')}</a>
                     </li>
                 </ul>
             </div>

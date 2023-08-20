@@ -17,6 +17,10 @@ import Mencloth from './Mencloth/Mencloth';
 import Womencloth from './WomenCloth/Womencloth';
 import Kidscloth from './KidsCloth/Kidscloth';
 import { useState } from 'react';
+import Settings from './Components/Settings/Settings';
+import Update from './Components/Update/Update';
+import Dashboard from './Dashboard/Dashboard';
+import Additems from './Components/Additems/Additems';
 
 function App() {
 
@@ -36,6 +40,10 @@ function App() {
         <Route path='/men' element={<div className='men'><Mencloth/></div>}/>
         <Route path='/women' element={<div className='women'><Womencloth/></div>}/>
         <Route path='/kids' element={<div className='kids'><Kidscloth/></div>}/>
+        <Route path='/setting' element={<div className='setting'><Settings/></div>}/>
+        <Route path='/update' element={<div className='update'><Update/></div>}/>
+        <Route path='/dashboard' element={<div className='dashboaard'><Dashboard/></div>}/>
+        <Route path='/additem' element={<div className='additem'><Additems/></div>}/>
       </Routes>
       <div className='footer'><Footer /></div>
 

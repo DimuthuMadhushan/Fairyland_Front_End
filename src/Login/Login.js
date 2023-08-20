@@ -35,16 +35,33 @@ function Login() {
   },
   
 })
-const data=await response.json();
-Cookies.set('jwt',data.jwt,{expires:1})
-console.log(Cookies.get('name')+'  Dimuthu')
-Cookies.set('user' ,username,{expires:1})
-navigate('/');
+.then((response) => response.json())
+.then((json) => setCookies(json));
+
     }catch(error){
       alert("Invalid username or passworD");
       setUserName('');
       setPassword('');
     }
+ }
+ const setCookies=(json)=>{
+  console.log(json.role);
+    Cookies.set('user',username,{expires:7});
+    Cookies.set('id',json.id,{expires:7});
+    Cookies.set('jwt',json.jwt,{expires:7});
+    Cookies.set('role',json.role,{expires:7});
+    if(json.role==="ROLE_USER"){
+      Cookies.set('seti',"Settings",{expires:7})
+    }else{
+      Cookies.set('seti',"",{expires:7})
+    }
+    
+    if(json.role==="ROLE_ADMIN"){
+      Cookies.set('dash',"DashBoard",{expires:7})
+    }else{
+      Cookies.set('dash',"")
+    }
+    navigate('/')
  }
   return (
     <div className='log'>

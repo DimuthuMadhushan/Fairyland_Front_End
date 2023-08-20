@@ -5,12 +5,12 @@ import { Link, useParams } from 'react-router-dom'
 
 
 function ItemDetail() {
-  Cookies.set('items',0,{expires:1})
+  Cookies.set('items', 0, { expires: 1 })
   const { id } = useParams();
   const [item, setItem] = useState([])
-  const[sizeval,setSize]=useState(0);
-  const[select,setSelect]=useState('');
-  const[qty,setQty]=useState('')
+  const [sizeval, setSize] = useState(0);
+  const [select, setSelect] = useState('');
+  const [qty, setQty] = useState('')
   useEffect(() => {
     const fecthItems = async () => {
       const response = await fetch(`https://fakestoreapi.com/products/${id}`)
@@ -19,41 +19,41 @@ function ItemDetail() {
     }
     fecthItems()
   }, [])
-  const selectval=()=>{
-    if(select==="SM"){
+  const selectval = () => {
+    if (select === "SM") {
       setSize(0)
-    }else if(select==="M"){
+    } else if (select === "M") {
       setSize(1)
-    }else if(select==="L"){
+    } else if (select === "L") {
       setSize(2)
-    }else{
+    } else {
       setSize(3)
     }
   }
-  const handleCart=(item,b)=>{
+  const handleCart = (item, b) => {
     console.log(item)
-    const cart=JSON.parse(localStorage.getItem('cart')) || [];
-    const isProductExist=cart.find(product=>product.id===item.id)
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const isProductExist = cart.find(product => product.id === item.id)
     selectval();
-    if(isProductExist){
-      const updatedCart=cart.map(product=>{
-        
-        if(product.id===item.id){
-          
-          return{
+    if (isProductExist) {
+      const updatedCart = cart.map(product => {
+
+        if (product.id === item.id) {
+
+          return {
             ...product,
             quantity: parseInt(qty),
-            size:sizeval
+            size: sizeval
           }
         }
         return product
       })
-      localStorage.setItem('cart',JSON.stringify(updatedCart))
-    }else{
-      localStorage.setItem('cart',JSON.stringify([...cart,{...item,quantity: parseInt(qty),size:sizeval}]))
+      localStorage.setItem('cart', JSON.stringify(updatedCart))
+    } else {
+      localStorage.setItem('cart', JSON.stringify([...cart, { ...item, quantity: parseInt(qty), size: sizeval }]))
     }
-      alert("Aded succesfuly")
-    
+    alert("Aded succesfuly")
+
   }
 
   if (!Object.keys(item).length > 0) return (<div>Product not found</div>)
@@ -70,7 +70,7 @@ function ItemDetail() {
               </div>
               <p className="leading-relaxed">{item?.description}</p>
               <span className="text-gray-900 text-m title-font font-medium">Quantity :
-                <input value={qty} onChange={(e)=>{setQty(e.target.value)}} type="text" id="full-name" name="full-name" className="bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-0 transition-colors duration-200 ease-in-out " />
+                <input value={qty} onChange={(e) => { setQty(e.target.value) }} type="text" id="full-name" name="full-name" className="bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-0 transition-colors duration-200 ease-in-out " />
               </span>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                 <div className="flex">
@@ -80,7 +80,7 @@ function ItemDetail() {
                 <div className="flex ml-6 items-center">
                   <span className="mr-3">Size</span>
                   <div className="relative">
-                    <select value={select} onChange={(e)=>{setSelect(e.target.value)}} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
+                    <select value={select} onChange={(e) => { setSelect(e.target.value) }} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
                       <option>SM</option>
                       <option>M</option>
                       <option>L</option>
@@ -98,10 +98,10 @@ function ItemDetail() {
               <div className="flex">
                 <span className="title-font font-medium text-2xl text-gray-900">${item?.price}</span>
                 <Link to={'/cart'}>
-                <Button className='but checkout' onClick={()=>handleCart(item,true)}>Check out</Button>
+                  <Button className='but checkout' onClick={() => handleCart(item, true)}>Check out</Button>
                 </Link>
                 <Link to={'/'}>
-                <Button className='but addtocart' onClick={()=>handleCart(item,true)}>Add to cart</Button>
+                  <Button className='but addtocart' onClick={() => handleCart(item, true)}>Add to cart</Button>
                 </Link>
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                   <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">

@@ -11,6 +11,8 @@ function Headerbar() {
   const logout=async()=>{
       Cookies.remove('jwt');
       Cookies.remove('user');
+      Cookies.remove('seti');
+      Cookies.remove('dash');
       navigate('/')
   }
   return (

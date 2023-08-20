@@ -15,8 +15,10 @@ function Cart() {
     }
 
     if (cart.length === 0) {
-        alert("Cart is Empty")
-        navigate('/')
+        return(
+            <div className='emp'>Oops....! Cart Is Empty</div>
+            
+        )
     }
     const checkout =async() => {
         for(let i=0;i<cart.length;i++){
@@ -25,7 +27,7 @@ function Cart() {
                 method: 'POST',
               
                 body: JSON.stringify({
-                    date:2011-10-18,
+                    date:new Date(),
                     orderDetailsList:[
                         {
                             quantity:cart[i].quantity,
@@ -42,20 +44,14 @@ function Cart() {
                 },
             })
 
+
+
         }
-       
-           
-
-        console.log(cart)
-        for (let i = 0; i < cart.length; i++) {
-            setTotPrice(totPrice + cart[i].price * cart[i].quantity)
-            console.log(cart[i])
-        }
-
-
-        console.log(totPrice)
-
+        localStorage.clear('cart')
+        navigate('/cart')
+        
     }
+
     return (
 
 
