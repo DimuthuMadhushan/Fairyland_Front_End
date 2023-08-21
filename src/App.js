@@ -21,6 +21,9 @@ import Settings from './Components/Settings/Settings';
 import Update from './Components/Update/Update';
 import Dashboard from './Dashboard/Dashboard';
 import Additems from './Components/Additems/Additems';
+import Updelitem from './Components/Updelitem/Updelitem';
+import Customerlist from './Components/Customerlist/Customerlist';
+import Customerdetails from './Components/Customerdetails/Customerdetails';
 
 function App() {
 
@@ -44,6 +47,9 @@ function App() {
         <Route path='/update' element={<div className='update'><Update/></div>}/>
         <Route path='/dashboard' element={<div className='dashboaard'><Dashboard/></div>}/>
         <Route path='/additem' element={<div className='additem'><Additems/></div>}/>
+        <Route path='/updatedelitem' element={<div className='additem'><Updelitem/></div>}/>
+        <Route path='/custlist' element={<div className='custlist'><Customerlist/></div>}/>
+        <Route path='/custdetail' element={<div className='custdetail'><Customerdetails/></div>}/>
       </Routes>
       <div className='footer'><Footer /></div>
 

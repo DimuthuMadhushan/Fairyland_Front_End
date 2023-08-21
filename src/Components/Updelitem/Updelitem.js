@@ -1,5 +1,4 @@
-
-import { PhotoIcon } from '@heroicons/react/24/solid'
+import { PhotoIcon} from '@heroicons/react/24/solid'
 import React, { useState } from 'react';
 import {
     MDBBtn,
@@ -12,63 +11,16 @@ import {
 }
 
     from 'mdb-react-ui-kit';
-import { Input } from '@mui/material';
-import Cookies from 'js-cookie';
-const Additems = () => {
+
+const Updelitem = () => {
     const [sQuantity, setSqty] = useState('');
     const [mQuantity, setMqty] = useState('');
     const [lQuantity, setLqty] = useState('');
     const [xlQuantity, setxLqty] = useState('');
-    const [unitPrice, setunitPrice] = useState('');
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('MEN');
-    const [image, setSelectedImage] = useState(null);
-    const additem = () => {
-        console.log(category)
-        if (checkValueIsNumberOrNot(sQuantity) && checkValueIsNumberOrNot(mQuantity) && checkValueIsNumberOrNot(lQuantity) && checkValueIsNumberOrNot(xlQuantity) && checkValueIsNumberOrNot(unitPrice) && title !== null && description !== null && image !== null) {
-            fetch('http://localhost:8080/item/post', {
-                method: 'POST',
-                body: JSON.stringify({
-                    category: category,
-                    xLQuantity: xlQuantity,
-                    lQuantity: lQuantity,
-                    mQuantity: mQuantity,
-                    sQuantity:sQuantity,
-                    description:description,
-                    unitPrice:parseFloat(unitPrice),
-                    tittle:title,
-                }),
-                headers: {
-                    "Authorization": `Bearer ${Cookies.get('jwt')}`,'Content-type': 'application/json; charset=UTF-8',
-                },
-            })
-                .then((response) => response.json())
-                .then((json) => sendImage(json));
-        } else {
-            alert("Please Fill All Lines in Correct Format");
-        }
-    }
-    const sendImage=(json)=>{
-        fetch(`http://localhost:8080/item/addimage?id=${json.id}&image=${image}`, {
-            method: 'POST',
-            headers: {
-                "Authorization": `Bearer ${Cookies.get('jwt')}`,'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json())
-            .then((json) => sendImage(json));
-    }
-    const checkValueIsNumberOrNot = (number) => {
-        if (isNaN(number)) {
-            return false;
-        } else {
-            return true;
-        }
-    };
-    return (
-        <div>
-            <MDBContainer fluid className='h-custom'>
+    const [homeNo, setHomeNo] = useState('')
+  return (
+    <div>
+        <MDBContainer fluid className='h-custom'>
                 <MDBRow className='d-flex justify-content-center align-items-center h-100'>
                     <MDBCol col='12' className='m-5'>
                         <MDBCard className='card-registration card-registration-2' style={{ borderRadius: '15px' }}>
@@ -78,7 +30,7 @@ const Additems = () => {
                                         <MDBRow>
                                             <h3 className="fw-normal mb-0" style={{ color: 'black' }}>Add Your Items</h3>
                                             <MDBCol md='6'>
-                                                <MDBInput value={sQuantity} onChange={(e) => { setSqty(e.target.value) }} wrapperClass='mb-4 mt-5' label='Small Quantity' size='lg' type='text' />
+                                                <MDBInput value={sQuantity} onChange={(e) => { setSqty(e.target.value) }} wrapperClass='mb-4 mt-5' label='Small Quantity' size='lg' id='form15' type='text' />
                                             </MDBCol>
                                             <MDBCol md='6'>
                                                 <MDBInput value={mQuantity} onChange={(e) => { setMqty(e.target.value) }} wrapperClass='mb-4 mt-5' label='Medium Quantity' size='lg' id='form15' type='text' />
@@ -92,13 +44,13 @@ const Additems = () => {
                                         </MDBRow>
                                         <MDBRow>
                                             <MDBCol md='5'>
-                                                <MDBInput value={unitPrice} onChange={(e => { setunitPrice(e.target.value) })} wrapperClass='mb-4' label='Unit Price(Rs.)' size='lg' type='text' />
+                                                <MDBInput value={homeNo} onChange={(e => { setHomeNo(e.target.value) })} wrapperClass='mb-4' label='Unit Price(Rs.)' size='lg' type='text' />
                                             </MDBCol>
                                             <MDBCol>
                                                 <div className="flex ml-12 mb-10 items-center">
                                                     <span className="mr-3">Category</span>
                                                     <div className="relative">
-                                                        <select value={category} onChange={(e) => { setCategory(e.target.value) }} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
+                                                        <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
                                                             <option>Men</option>
                                                             <option>Women</option>
                                                             <option>Kids</option>
@@ -113,19 +65,34 @@ const Additems = () => {
                                             </MDBCol>
                                         </MDBRow>
                                         <MDBCol md='6'>
-                                            <MDBInput value={title} onChange={(e) => { setTitle(e.target.value) }} wrapperClass='mb-0' label='Title' size='lg' id='form15' type='text' />
+                                            <MDBInput value={xlQuantity} onChange={(e) => { setxLqty(e.target.value) }} wrapperClass='mb-0' label='Title' size='lg' id='form15' type='text' />
                                         </MDBCol>
                                     </MDBCol>
                                     <MDBCol md='6' className='bg-teal-700 p-5'>
                                         <h3 className="fw-normal mb-3 text-white" style={{ color: '#4835d4' }}></h3>
                                         <div className="p-2 w-full">
                                             <div className="relative">
-                                                <textarea value={description} onChange={(e) => { setDescription(e.target.value) }} id="message" name="message" className="w-full bg-white bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                                                <textarea id="message" name="message" className="w-full bg-white bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                                                 <label for="message" className="leading-7 text-l text-white">Description</label>
                                             </div>
                                         </div>
-                                        <Input type="file" onChange={(event) => { console.log(event.target.files[0]); setSelectedImage(event.target.files[0]); }} />
-                                        <MDBBtn color='light' size='lg' onClick={() => additem()}>Add</MDBBtn>
+                                        <div className="mt-2 mb-4 flex justify-center rounded-lg bg-white border border-dashed border-gray-900/25 px-6 py-10">
+                                            <div className="text-center">
+                                                <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
+                                                <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                                                    <label
+                                                        htmlFor="file-upload"
+                                                        className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500" >
+                                                        <span>Upload a file</span>
+                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                    </label>
+                                                    <p className="pl-1">or drag and drop</p>
+                                                </div>
+                                                <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                                            </div>
+                                        </div>
+                                        <MDBBtn color='light' size='lg'>Delete</MDBBtn>
+                                        <MDBBtn color='light'className='ml-5' size='lg'>Update</MDBBtn>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCardBody>
@@ -133,8 +100,8 @@ const Additems = () => {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-        </div>
-    )
+    </div>
+  )
 }
 
-export default Additems
+export default Updelitem
