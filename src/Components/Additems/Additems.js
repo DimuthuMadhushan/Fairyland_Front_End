@@ -1,5 +1,3 @@
-
-import { PhotoIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react';
 import {
     MDBBtn,
@@ -14,6 +12,7 @@ import {
     from 'mdb-react-ui-kit';
 import { Input } from '@mui/material';
 import Cookies from 'js-cookie';
+
 const Additems = () => {
     const [sQuantity, setSqty] = useState('');
     const [mQuantity, setMqty] = useState('');
@@ -21,43 +20,51 @@ const Additems = () => {
     const [xlQuantity, setxLqty] = useState('');
     const [unitPrice, setunitPrice] = useState('');
     const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('MEN');
-    const [image, setSelectedImage] = useState(null);
+    const [category, setCategory] = useState('');
+    const [file, setFileList] = useState(null);
+    const [img,setImage]=useState(null);
     const additem = () => {
+        let formData=new FormData();
+        formData.append("category",category);
+        formData.append("xLQuantity",parseInt(xlQuantity));
+        formData.append("lQuantity",parseInt(lQuantity));
+        formData.append("mQuantity",parseInt(mQuantity));
+        formData.append("sQuantity",parseInt(sQuantity));
+        formData.append("unitPrice",parseFloat(unitPrice));
+        formData.append("tittle",title);
+        formData.append("image",file);
         console.log(category)
-        if (checkValueIsNumberOrNot(sQuantity) && checkValueIsNumberOrNot(mQuantity) && checkValueIsNumberOrNot(lQuantity) && checkValueIsNumberOrNot(xlQuantity) && checkValueIsNumberOrNot(unitPrice) && title !== null && description !== null && image !== null) {
-            fetch('http://localhost:8080/item/post', {
+        if (checkValueIsNumberOrNot(sQuantity) && checkValueIsNumberOrNot(mQuantity) && checkValueIsNumberOrNot(lQuantity) && checkValueIsNumberOrNot(xlQuantity) && checkValueIsNumberOrNot(unitPrice) && title !== null) {
+            fetch('http://localhost:8080/item/addimage', {
                 method: 'POST',
-                body: JSON.stringify({
-                    category: category,
-                    xLQuantity: xlQuantity,
-                    lQuantity: lQuantity,
-                    mQuantity: mQuantity,
-                    sQuantity:sQuantity,
-                    description:description,
-                    unitPrice:parseFloat(unitPrice),
-                    tittle:title,
-                }),
                 headers: {
-                    "Authorization": `Bearer ${Cookies.get('jwt')}`,'Content-type': 'application/json; charset=UTF-8',
+                    "Authorization": `Bearer ${Cookies.get('jwt')}`
                 },
+                body:formData
+                
             })
                 .then((response) => response.json())
-                .then((json) => sendImage(json));
+                .then((json) => validate(json))
+                .catch((error)=>alert(error));
         } else {
             alert("Please Fill All Lines in Correct Format");
         }
     }
-    const sendImage=(json)=>{
-        fetch(`http://localhost:8080/item/addimage?id=${json.id}&image=${image}`, {
-            method: 'POST',
-            headers: {
-                "Authorization": `Bearer ${Cookies.get('jwt')}`,'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json())
-            .then((json) => sendImage(json));
+
+    const validate=(json)=>{
+        if(json===true){
+            alert("Successfully Added");
+    setSqty('');
+    setMqty('');
+    setLqty('');
+    setxLqty('');
+    setunitPrice('');
+    setTitle('');
+    setCategory('');
+    setFileList(null);
+    setImage(null);
+
+        }
     }
     const checkValueIsNumberOrNot = (number) => {
         if (isNaN(number)) {
@@ -66,6 +73,7 @@ const Additems = () => {
             return true;
         }
     };
+
     return (
         <div>
             <MDBContainer fluid className='h-custom'>
@@ -99,9 +107,9 @@ const Additems = () => {
                                                     <span className="mr-3">Category</span>
                                                     <div className="relative">
                                                         <select value={category} onChange={(e) => { setCategory(e.target.value) }} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
-                                                            <option>Men</option>
-                                                            <option>Women</option>
-                                                            <option>Kids</option>
+                                                            <option>MEN</option>
+                                                            <option>WOMEN</option>
+                                                            <option>KIDS</option>
                                                         </select>
                                                         <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                                                             <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4" viewBox="0 0 24 24">
@@ -115,17 +123,12 @@ const Additems = () => {
                                         <MDBCol md='6'>
                                             <MDBInput value={title} onChange={(e) => { setTitle(e.target.value) }} wrapperClass='mb-0' label='Title' size='lg' id='form15' type='text' />
                                         </MDBCol>
-                                    </MDBCol>
-                                    <MDBCol md='6' className='bg-teal-700 p-5'>
-                                        <h3 className="fw-normal mb-3 text-white" style={{ color: '#4835d4' }}></h3>
-                                        <div className="p-2 w-full">
-                                            <div className="relative">
-                                                <textarea value={description} onChange={(e) => { setDescription(e.target.value) }} id="message" name="message" className="w-full bg-white bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
-                                                <label for="message" className="leading-7 text-l text-white">Description</label>
-                                            </div>
-                                        </div>
-                                        <Input type="file" onChange={(event) => { console.log(event.target.files[0]); setSelectedImage(event.target.files[0]); }} />
+                                         <Input type="file" onChange={(event) => { setImage(URL.createObjectURL(event.target.files[0])); setFileList(event.target.files[0]); }} />
                                         <MDBBtn color='light' size='lg' onClick={() => additem()}>Add</MDBBtn>
+                                    </MDBCol>
+                                    <MDBCol md='6' className='bg-none'>
+                                      <img src={img}></img>
+                                       
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCardBody>

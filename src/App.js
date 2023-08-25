@@ -24,6 +24,7 @@ import Additems from './Components/Additems/Additems';
 import Updelitem from './Components/Updelitem/Updelitem';
 import Customerlist from './Components/Customerlist/Customerlist';
 import Customerdetails from './Components/Customerdetails/Customerdetails';
+import Orders from './Orders/Orders';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
         <Route path='/updatedelitem' element={<div className='additem'><Updelitem/></div>}/>
         <Route path='/custlist' element={<div className='custlist'><Customerlist/></div>}/>
         <Route path='/custdetail' element={<div className='custdetail'><Customerdetails/></div>}/>
+        <Route path='/orders' element={<div className='custdetail'><Orders/></div>}/>
       </Routes>
       <div className='footer'><Footer /></div>
 
