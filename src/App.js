@@ -25,6 +25,7 @@ import Updelitem from './Components/Updelitem/Updelitem';
 import Customerlist from './Components/Customerlist/Customerlist';
 import Customerdetails from './Components/Customerdetails/Customerdetails';
 import Orders from './Orders/Orders';
+import Orderdetail from './Orderdetail/Orderdetail';
 
 function App() {
 
@@ -38,20 +39,21 @@ function App() {
         <Route path='/product/:id' element={<div className='itemdetail'><ItemDetail /></div>} />
         <Route path='/about' element={<div className='about'><About /></div>} />
         <Route path='/contact' element={<div className='contactus'><Contactus /></div>} />
-        <Route path='/cart' element={<div className='cart'><Cart/></div>}/>
-        <Route path='/login' element={<div className='login'><Login/></div>}/>
-        <Route path='/registraion' element={<div className='registration'><Registrationform/></div>}/>
-        <Route path='/men' element={<div className='men'><Mencloth/></div>}/>
-        <Route path='/women' element={<div className='women'><Womencloth/></div>}/>
-        <Route path='/kids' element={<div className='kids'><Kidscloth/></div>}/>
-        <Route path='/setting' element={<div className='setting'><Settings/></div>}/>
-        <Route path='/update' element={<div className='update'><Update/></div>}/>
-        <Route path='/dashboard' element={<div className='dashboaard'><Dashboard/></div>}/>
-        <Route path='/additem' element={<div className='additem'><Additems/></div>}/>
-        <Route path='/updatedelitem' element={<div className='additem'><Updelitem/></div>}/>
-        <Route path='/custlist' element={<div className='custlist'><Customerlist/></div>}/>
-        <Route path='/custdetail' element={<div className='custdetail'><Customerdetails/></div>}/>
-        <Route path='/orders' element={<div className='custdetail'><Orders/></div>}/>
+        <Route path='/cart' element={<div className='cart'><Cart /></div>} />
+        <Route path='/login' element={<div className='login'><Login /></div>} />
+        <Route path='/registraion' element={<div className='registration'><Registrationform /></div>} />
+        <Route path='/men' element={<div className='men'><Mencloth /></div>} />
+        <Route path='/women' element={<div className='women'><Womencloth /></div>} />
+        <Route path='/kids' element={<div className='kids'><Kidscloth /></div>} />
+        <Route path='/setting' element={<div className='setting'><Settings /></div>} />
+        <Route path='/update' element={<div className='update'><Update /></div>} />
+        <Route path='/dashboard' element={<div className='dashboaard'><Dashboard /></div>} />
+        <Route path='/additem' element={<div className='additem'><Additems /></div>} />
+        <Route path='/updatedelitem' element={<div className='additem'><Updelitem /></div>} />
+        <Route path='/custlist' element={<div className='custlist'><Customerlist /></div>} />
+        <Route path='/custdetail' element={<div className='custdetail'><Customerdetails /></div>} />
+        <Route path='/orders' element={<div className='custdetail'><Orders /></div>} />
+        <Route path='/orderdetail' element={<div><Orderdetail /></div>} />
       </Routes>
       <div className='footer'><Footer /></div>
 

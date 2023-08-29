@@ -12,8 +12,9 @@ import {
     from 'mdb-react-ui-kit';
 import { Input } from '@mui/material';
 import Cookies from 'js-cookie';
-
+import Swal from 'sweetalert2';
 const Additems = () => {
+    const Swal = require('sweetalert2');
     const [sQuantity, setSqty] = useState('');
     const [mQuantity, setMqty] = useState('');
     const [lQuantity, setLqty] = useState('');
@@ -22,47 +23,52 @@ const Additems = () => {
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
     const [file, setFileList] = useState(null);
-    const [img,setImage]=useState(null);
+    const [img, setImage] = useState(null);
     const additem = () => {
-        let formData=new FormData();
-        formData.append("category",category);
-        formData.append("xLQuantity",parseInt(xlQuantity));
-        formData.append("lQuantity",parseInt(lQuantity));
-        formData.append("mQuantity",parseInt(mQuantity));
-        formData.append("sQuantity",parseInt(sQuantity));
-        formData.append("unitPrice",parseFloat(unitPrice));
-        formData.append("tittle",title);
-        formData.append("image",file);
+
+        let formData = new FormData();
+        formData.append("category", category);
+        formData.append("xLQuantity", parseInt(xlQuantity));
+        formData.append("lQuantity", parseInt(lQuantity));
+        formData.append("mQuantity", parseInt(mQuantity));
+        formData.append("sQuantity", parseInt(sQuantity));
+        formData.append("unitPrice", parseFloat(unitPrice));
+        formData.append("tittle", title);
+        formData.append("image", file);
         console.log(category)
-        if (checkValueIsNumberOrNot(sQuantity) && checkValueIsNumberOrNot(mQuantity) && checkValueIsNumberOrNot(lQuantity) && checkValueIsNumberOrNot(xlQuantity) && checkValueIsNumberOrNot(unitPrice) && title !== null) {
+        if (checkValueIsNumberOrNot(sQuantity) && checkValueIsNumberOrNot(mQuantity) && checkValueIsNumberOrNot(lQuantity) && checkValueIsNumberOrNot(xlQuantity) && checkValueIsNumberOrNot(unitPrice) && title !== null&&category!==null&& file!==null) {
             fetch('http://localhost:8080/item/addimage', {
                 method: 'POST',
                 headers: {
                     "Authorization": `Bearer ${Cookies.get('jwt')}`
                 },
-                body:formData
-                
+                body: formData
+
             })
                 .then((response) => response.json())
                 .then((json) => validate(json))
-                .catch((error)=>alert(error));
+                .catch((error) => alert(error));
         } else {
-            alert("Please Fill All Lines in Correct Format");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please Complete All Fields In Correct Format!',
+            })
         }
     }
 
-    const validate=(json)=>{
-        if(json===true){
-            alert("Successfully Added");
-    setSqty('');
-    setMqty('');
-    setLqty('');
-    setxLqty('');
-    setunitPrice('');
-    setTitle('');
-    setCategory('');
-    setFileList(null);
-    setImage(null);
+    const validate = (json) => {
+        if (json === true) {
+            Swal.fire('Succesfully Added')
+            setSqty('');
+            setMqty('');
+            setLqty('');
+            setxLqty('');
+            setunitPrice('');
+            setTitle('');
+            setCategory('');
+            setFileList(null);
+            setImage(null);
 
         }
     }
@@ -123,12 +129,12 @@ const Additems = () => {
                                         <MDBCol md='6'>
                                             <MDBInput value={title} onChange={(e) => { setTitle(e.target.value) }} wrapperClass='mb-0' label='Title' size='lg' id='form15' type='text' />
                                         </MDBCol>
-                                         <Input type="file" onChange={(event) => { setImage(URL.createObjectURL(event.target.files[0])); setFileList(event.target.files[0]); }} />
+                                        <Input type="file" onChange={(event) => { setImage(URL.createObjectURL(event.target.files[0])); setFileList(event.target.files[0]); }} />
                                         <MDBBtn color='light' size='lg' onClick={() => additem()}>Add</MDBBtn>
                                     </MDBCol>
                                     <MDBCol md='6' className='bg-none'>
-                                      <img src={img}></img>
-                                       
+                                        <img src={img}></img>
+
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCardBody>

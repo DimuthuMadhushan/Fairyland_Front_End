@@ -17,13 +17,9 @@ import Products from '../Components/Products/Products';
 function Mencloth() {
     const [items, setItems] = useState([])
     useEffect(() => {
-      const fecthItems = async () => {
-        const response = await fetch('https://fakestoreapi.com/products')
-        const data = await response.json()
-        console.log(data)
-        setItems(data)
-      }
-      fecthItems()
+      fetch('http://localhost:8080/item/men')
+      .then((response)=>response.json())
+      .then((json)=>setItems(json));
     }, [])
   return (
     <div className='mensw'>

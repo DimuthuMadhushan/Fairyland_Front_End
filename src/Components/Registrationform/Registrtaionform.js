@@ -11,6 +11,8 @@ import {
 }
 
     from 'mdb-react-ui-kit';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 function Registrationform() {
     const[firstname,setFirstName]=useState('');
     const[lastname,setLastName]=useState('');
@@ -25,6 +27,9 @@ function Registrationform() {
     const[phoneNum1,setPhoneNum1]=useState('');
     const[phoneNum2,setPhoneNum2]=useState('');
     const[isCheked,setIsCheked]=useState(false);
+
+    const navigate=useNavigate();
+    const Swal=require('sweetalert2');
 
     const addUserDetails=()=>{
         if((firstname!==''&&lastname!==''&& userName!==''&&password!==''&&confirmPassWord!==''&&email!==''
@@ -53,20 +58,35 @@ function Registrationform() {
             .then((response) => response.json())
             .then((json) =>{
                 if(json){
-                    alert("Succesfuly added")
+                    Swal.fire('Successfuly Added')
+                    navigate('/login')
                 }else{
-                    alert("Username Alrady Exist !");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Username Already Exist!',
+                        
+                      })
                     setUserName('');
                 }
             });
       }
       else {
-        alert("Password don,t match");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Password do not match!',
+          });
         setConfirmPassword('');
         setPassword('');
       }
     }else{
-        alert("Please fill all fields")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Complete All Feilds!',
+           
+          })
     }
     
     }

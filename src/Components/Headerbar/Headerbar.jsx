@@ -7,16 +7,19 @@ import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 
 function Headerbar() {
-  const navigate=useNavigate();
-  const logout=async()=>{
-      Cookies.remove('jwt');
-      Cookies.remove('user');
-      Cookies.remove('seti');
-      Cookies.remove('dash');
-      navigate('/')
+  const navigate = useNavigate();
+  const logout = () => {
+    Cookies.remove('jwt');
+    Cookies.remove('user');
+    Cookies.remove('seti');
+    Cookies.remove('dash');
+    Cookies.set('dash', '')
+    Cookies.set('seti', '')
+    navigate('/')
+    navigate('/')
   }
   return (
-    
+
     <div className='header'>
       <div className='n-left'>
         <img src={Logo} alt="" />
@@ -31,18 +34,15 @@ function Headerbar() {
               <a href='/login'><Button className='but'>Login</Button></a>
             </li>
             <li>
-              <a ><Button onClick={()=>logout()} className='but'>Logut</Button></a>
+              <a ><Button onClick={() => logout()} className='but'>Logut</Button></a>
             </li>
             <li className='usertxt'>{Cookies.get('user')}</li>
             <li>
-              
               <a
                 href='/cart'
               >
-            
                 <img className='cart-image' src={CartImage} alt="" />
-                <span className='cartw'>{Cookies.get('numofitems')} Item(s)</span>
-
+                <span className='cartw'>{Cookies.get('cart')} Item(s)</span>
               </a>
             </li>
           </ul>

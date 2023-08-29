@@ -12,6 +12,7 @@ import {
 
     from 'mdb-react-ui-kit';
 import Cookies from 'js-cookie';
+import Swal from 'sweetalert2';
 const Updelitem = () => {
     const [id, setId] = useState('');
     const [category, setCategory] = useState('');
@@ -42,7 +43,6 @@ const Updelitem = () => {
         setunitPrice(data.unitPrice);
         settitle(data.tittle);
         setImg(data.imgUrl);
-        console.log(data.imgUrl)
 
     }
     const updateItem = () => {
@@ -55,6 +55,7 @@ const Updelitem = () => {
                 mQuantity: mQuantity,
                 sQuantity: sQuantity,
                 unitPrice: unitPrice,
+                imgUrl: '',
                 tittle: title
             }),
             headers: {
@@ -62,8 +63,23 @@ const Updelitem = () => {
             },
         })
             .then((response) => response.json())
-            .then((json) => console.log(json));
+            .then((json) => success(json));
     };
+    const success = (json) => {
+        if (json) {
+            Swal.fire("Update Success");
+            setCategory('');
+            setSqty('');
+            setMqty('');
+            setLqty('');
+            setxLqty('');
+            setunitPrice('');
+            settitle('');
+            setImg('');
+        } else {
+            Swal.fire("Update unsuccess")
+        }
+    }
     const deleteItem = async () => {
         const response = await fetch(`http://localhost:8080/item/delete/${id}`, {
             method: 'DELETE',
@@ -73,7 +89,7 @@ const Updelitem = () => {
         })
         const data = await response.json()
         if (data === true) {
-            alert("Successfuly Deleted");
+            Swal.fire("Successfuly Deleted");
             setCategory('');
             setSqty('');
             setMqty('');
@@ -83,7 +99,7 @@ const Updelitem = () => {
             settitle('');
             setImg(null);
         } else if (data === false) {
-            alert("Delete unsuccesfull")
+            Swal.fire("Delete unsuccesfull")
         }
 
     };
@@ -150,7 +166,7 @@ const Updelitem = () => {
                                         <MDBBtn color='light' size='lg' onClick={() => deleteItem()}>Delete</MDBBtn>
                                     </MDBCol>
                                     <MDBCol md='6' className='bg-none'>
-                                        <img src={`http://localhost:8080/item/getimage/${img}`}></img>
+                                        <img src={`http://localhost:8080/item/getimage/${img}`} alt='Item'></img>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCardBody>

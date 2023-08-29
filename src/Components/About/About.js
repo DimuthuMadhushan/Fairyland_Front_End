@@ -18,7 +18,6 @@ function About() {
                             Fairyland.lk has well Skilled, Responsible Director board and honestly staff. Our main focus is to sell the quality and baranded products for you, amazing services and keeping a long-time business relationship with you.
 
                             Moreover, we have partnered with platforms such as Daraz and Ikman.lk to broaden and create more business opportunities through brand awareness. We import our product range directly according to the customer demand and ultimately being able to offer the best prices in the market with quality goods.</p>
-
                     </div>
                 </div>
             </section>

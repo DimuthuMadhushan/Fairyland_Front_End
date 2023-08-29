@@ -9,13 +9,14 @@ import Placeholder from 'react-bootstrap/Placeholder';
 function Homepage() {
   const [items, setItems] = useState([])
   useEffect(() => {
-    const fecthItems = async () => {
-      const response = await fetch('https://fakestoreapi.com/products')
-      const data = await response.json()
-      setItems(data)
-    }
-    fecthItems()
-  }, [])
+    fecthItems();
+  }, []);
+
+  const fecthItems = () => {
+    fetch('http://localhost:8080/item/new')
+  .then((response)=>response.json())
+  .then((json)=>setItems(json));
+  }
   return (
     <div>
       <div className='boximg'>

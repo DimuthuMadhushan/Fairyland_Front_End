@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import {
     MDBBtn,
@@ -12,12 +11,10 @@ import {
 
     from 'mdb-react-ui-kit';
 import Cookies from 'js-cookie';
-
+import Swal from 'sweetalert2';
 
 const Update = () => {
-
-
-
+    const Swal = require('sweetalert2')
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -32,7 +29,7 @@ const Update = () => {
         fetchCustomer()
     }, []);
     const fetchCustomer = () => {
-        const headers = { 'Authorization': `Bearer ${Cookies.get('jwt')}`, 'Content-type': 'application/json'};
+        const headers = { 'Authorization': `Bearer ${Cookies.get('jwt')}`, 'Content-type': 'application/json' };
         fetch(`http://localhost:8080/customer/detail/${Cookies.get('user')}`, { headers })
             .then((response) => response.json())
             .then((json) => setVariables(json));
@@ -51,30 +48,42 @@ const Update = () => {
     }
 
     const updateCustomer = async () => {
-        if((firstname!==''&&lastname!==''&&email!==''
-        &&homeNo!==''&&lane!==''&&town!==''&&postalCode!==''&&phoneNum1!==''&&phoneNum2!=='')){
+        if ((firstname !== '' && lastname !== '' && email !== ''
+            && homeNo !== '' && lane !== '' && town !== '' && postalCode !== '' && phoneNum1 !== '' && phoneNum2 !== '')) {
             fetch(`http://localhost:8080/customer/update/${Cookies.get('user')}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                firstname:firstname,
-                lastname:lastname,
-                email:email,
-                homeNumber:homeNo,
-                lane:lane,
-                town:town,
-                postalCode:postalCode,
-                phone1:phoneNum1,
-                phone2:phoneNum2,
-                
-            }),
-            headers: {
-                'Authorization': `Bearer ${Cookies.get('jwt')}`,'Content-type': 'application/json',
-            },
-          })
-            .then((response) => response.json())
-            .then((json) =>console.log(json));
-        }else{
-            alert("Please Fill All Text Fields")
+                method: 'PUT',
+                body: JSON.stringify({
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    homeNumber: homeNo,
+                    lane: lane,
+                    town: town,
+                    postalCode: postalCode,
+                    phone1: phoneNum1,
+                    phone2: phoneNum2,
+
+                }),
+                headers: {
+                    'Authorization': `Bearer ${Cookies.get('jwt')}`, 'Content-type': 'application/json',
+                },
+            })
+            Swal.fire('Update Success');
+            setFirstName('');
+            setLastName('json.lastname')
+            setEmail('')
+            setHomeNo('')
+            setLane('')
+            setTown('')
+            setPostalCode('')
+            setPhoneNum1('')
+            setPhoneNum2('')
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                text: 'Please Fill All Text Feilds',
+            })
         }
     }
     return (
@@ -90,12 +99,12 @@ const Update = () => {
                                         <MDBInput value={firstname} onChange={(e) => { setFirstName(e.target.value) }} wrapperClass='mb-4' label='First Name' size='lg' id='form1' type='text' />
                                         <MDBInput value={lastname} onChange={(e) => { setLastName(e.target.value) }} wrapperClass='mb-4' label='Last Name' size='lg' id='form3' type='text' />
                                         <MDBRow>
-                                          
-                                            <MDBInput value={email} onChange={(e) => { setEmail(e.target.value) }} wrapperClass='mb-4'  label='Email' size='lg' id='form' type='text' />
+
+                                            <MDBInput value={email} onChange={(e) => { setEmail(e.target.value) }} wrapperClass='mb-4' label='Email' size='lg' id='form' type='text' />
                                         </MDBRow>
                                         <MDBRow>
                                             <MDBCol md='5'>
-                                                <MDBInput value={phoneNum1} onChange={(e) => { setPhoneNum1(e.target.value) }} wrapperClass='mb-4'  label='Phone Number 1' size='lg' id='form10' type='text' />
+                                                <MDBInput value={phoneNum1} onChange={(e) => { setPhoneNum1(e.target.value) }} wrapperClass='mb-4' label='Phone Number 1' size='lg' id='form10' type='text' />
                                             </MDBCol>
                                             <MDBCol md='5'>
                                                 <MDBInput value={phoneNum2} onChange={(e) => { setPhoneNum2(e.target.value) }} wrapperClass='mb-4' label='Phone Number 2' size='lg' id='form11' type='text' />

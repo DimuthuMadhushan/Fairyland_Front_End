@@ -14,20 +14,16 @@ import { Card, Placeholder } from 'react-bootstrap';
 import Products from '../Components/Products/Products';
 
 function Womencloth() {
-    const [items, setItems] = useState([])
-    useEffect(() => {
-      const fecthItems = async () => {
-        const response = await fetch('https://fakestoreapi.com/products')
-        const data = await response.json()
-        console.log(data)
-        setItems(data)
-      }
-      fecthItems()
-    }, [])
+  const [items, setItems] = useState([])
+  useEffect(() => {
+    fetch('http://localhost:8080/item/women')
+      .then((response) => response.json())
+      .then((json) => setItems(json));
+  }, [])
   return (
     <div className='mensw'>
-    <Swiper
-    modules={[Navigation, Pagination, Scrollbar, A11y]}
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={0}
         slidesPerView={2}
         navigation
@@ -35,15 +31,15 @@ function Womencloth() {
         scrollbar={{ draggable: true }}
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
-    >
+      >
         <SwiperSlide key={im1}><img src={im1} alt='1' /></SwiperSlide>
         <SwiperSlide key={im2}><img src={im2} alt='2' /></SwiperSlide>
         <SwiperSlide key={im3}><img src={im3} alt='3' /></SwiperSlide>
         <SwiperSlide key={im4}><img src={im4} alt='4' /></SwiperSlide>
 
-    </Swiper>
-    {/*Item Grid */}
-    <div className='menlist'>
+      </Swiper>
+      {/*Item Grid */}
+      <div className='menlist'>
         <div className='newarrival'>
           <div className='minnerdiv'>Scroll down to shopping</div>
         </div>
@@ -52,22 +48,22 @@ function Womencloth() {
             <Products products={items} />
             :
             <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
-        <Card.Body>
-          <Placeholder as={Card.Title} animation="glow">
-            <Placeholder xs={6} />
-          </Placeholder>
-          <Placeholder as={Card.Text} animation="glow">
-            <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
-            <Placeholder xs={6} /> <Placeholder xs={8} />
-          </Placeholder>
-          <Placeholder.Button variant="primary" xs={6} />
-        </Card.Body>
-      </Card>
-    
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Placeholder as={Card.Title} animation="glow">
+                  <Placeholder xs={6} />
+                </Placeholder>
+                <Placeholder as={Card.Text} animation="glow">
+                  <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                  <Placeholder xs={6} /> <Placeholder xs={8} />
+                </Placeholder>
+                <Placeholder.Button variant="primary" xs={6} />
+              </Card.Body>
+            </Card>
+
         }
-      </div>   
-</div>
+      </div>
+    </div>
   )
 }
 

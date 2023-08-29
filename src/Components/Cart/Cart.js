@@ -1,16 +1,18 @@
 import Cookies from 'js-cookie';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 function Cart() {
-    const [totPrice, setTotPrice] = useState(0);
+    const Swal=require('sweetalert2')
     const navigate = useNavigate()
     const cart = JSON.parse(localStorage.getItem('cart')) || []
-
-
+     console.log(cart)
+    
     const removeProduct = (id) => {
-        const updatedCart = cart.filter(item => item.id !== id)
+        const updatedCart = cart.filter(item => item.itemId !== id)
         localStorage.setItem('cart', JSON.stringify(updatedCart))
+        Cookies.set('cart',cart.length-1)
         navigate('/cart')
     }
 
@@ -20,7 +22,9 @@ function Cart() {
             
         )
     }
+    const grandTotal=cart.reduce((total, cartitem)=>total+(cartitem.unitPrice*cartitem.quantity),0);
     const checkout =async() => {
+
         for(let i=0;i<cart.length;i++){
        
             const response=await fetch(`http://localhost:8080/orders/add/${Cookies.get('user')}`, {
@@ -32,7 +36,7 @@ function Cart() {
                         {
                             quantity:cart[i].quantity,
                             size:cart[i].size,
-                            itemId:cart[i].id
+                            itemId:cart[i].itemId
                        
                         }
                     ]
@@ -47,7 +51,9 @@ function Cart() {
 
 
         }
+        Swal.fire('Order Successful')
         localStorage.clear('cart')
+        Cookies.set('cart',0)
         navigate('/cart')
         
     }
@@ -70,16 +76,17 @@ function Cart() {
                     </div>
                     {
                         cart?.map((cartitem) => {
+                           
                             return (
                                 <div className='flex items-center hover:bg-gray-100 -mx-8 px-6 py-5'>
                                     <div className='flex w-2/5'>
                                         <div className='w-20'>
-                                            <img className='h-24' src={cartitem?.image} alt={cartitem?.title}></img>
+                                            <img className='h-24' src={`http://localhost:8080/item/getItem/${cartitem?.itemId}`} alt={cartitem?.tittle}></img>
                                         </div>
                                         <div className='flex flex-col justify-between ml-4 flex-grow'>
-                                            <span className='font-bold text-sm'>{cartitem?.title}</span>
+                                            <span className='font-bold text-sm'>{cartitem?.tittle}</span>
                                             <span className='text-red-500 text-xs'>{cartitem?.category}</span>
-                                            <div className='font-semibold hover:text-red-500 text-gray-500 text-xs cursor-pointer' onClick={() => removeProduct(cartitem?.id)}>Remove</div>
+                                            <div className='font-semibold hover:text-red-500 text-gray-500 text-xs cursor-pointer' onClick={() => removeProduct(cartitem?.itemId)}>Remove</div>
                                         </div>
                                     </div>
                                     <div className='flex justfy-center w-1/5'>
@@ -91,8 +98,8 @@ function Cart() {
 
 
                                     </div>
-                                    <span className='text-center w-1/5 font-semibold text-sm'>${cartitem?.price}</span>
-                                    <span className='text-center w-1/5 font-semibold text-sm'>${cartitem?.price * cartitem?.quantity}</span>
+                                    <span className='text-center w-1/5 font-semibold text-sm'>Rs{cartitem?.unitPrice}</span>
+                                    <span className='text-center w-1/5 font-semibold text-sm'>Rs{cartitem?.unitPrice * cartitem?.quantity}</span>
                                 </div>)
                         })
                     }
@@ -110,12 +117,12 @@ function Cart() {
                     <h1 className='font-semibold text-2xl border-b pb-8'>Order Summery</h1>
                     <div className='flex justify-between mt-10 mb-5'>
                         <span className='font-semibold text-sm uppercase'>Items {cart?.length}</span>
-                        <span className='font-semibold text-sm'>590$</span>
+                        <span className='font-semibold text-sm'>Rs.{grandTotal}</span>
                     </div>
                     <div>
                         <label className='font-medium inline-block mb-3 text-sm uppercase'>Shipping</label>
                         <select className='block p-2 text-gray-600 w-full text-sm'>
-                            <option>Standard Shipping - $10</option>
+                            <option>Standard Shipping - Rs200</option>
                         </select>
                     </div>
                     <div className='py-10'>
@@ -126,7 +133,7 @@ function Cart() {
                     <div className='border-t mt-8'>
                         <div className='flex font-semibold justify-between py-6 text-sm uppercase'>
                             <span>Total cost</span>
-                            <spa>$600</spa>
+                            <spa>Rs.{grandTotal+200}</spa>
                         </div>
                         <button className='bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full' onClick={() => checkout()}>Checkout</button>
                     </div>
